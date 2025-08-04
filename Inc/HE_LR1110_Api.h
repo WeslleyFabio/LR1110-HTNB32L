@@ -1,13 +1,5 @@
 /*
-  _    _              _   _
- | |  | |     /\     | \ | |     /\
- | |__| |    /  \    |  \| |    /  \
- |  __  |   / /\ \   | . ` |   / /\ \
- | |  | |  / ____ \  | |\  |  / ____ \
- |_|  |_| /_/    \_\ |_| \_| /_/    \_\
- ================= R&D =================
-
- Copyright (c) 2023 Hana Electronics Indústria e Comércio LTDA
+Copyright (c) 2023 Weslley Fábio
 
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -26,7 +18,7 @@
 /*!
  * \file HE_LR1110_Api.h
  * \brief
- * \author Weslley Fábio - Hana Electronics R&D
+ * \author Weslley Fábio
  * \version 0.1
  * \date Set 26, 2023
  */

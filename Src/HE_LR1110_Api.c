@@ -1,6 +1,6 @@
 /*
 
- Copyright (c) 2023 Hana Electronics Indústria e Comércio LTDA
+ Copyright (c) 2023 Weslley Fábio
 
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -22,7 +22,6 @@
 #include "LR1110_Driver/lr11xx_crypto_engine.h"
 #include "LR1110_Driver/lr11xx_system.h"
 #include "LR1110_Driver/wifi.h"
-#include "HE_log_system.h"
 
 lr11xx_system_rfswitch_cfg_t smtc_shield_lr11xx_common_rf_switch_cfg = {
     .enable = LR11XX_SYSTEM_RFSW0_HIGH | LR11XX_SYSTEM_RFSW1_HIGH,
@@ -73,7 +72,7 @@ LR1110ResponseNetworksToDevice_t HE_NetworkReading(void)
 
     if (LR1110_Configure() == FALSE)
     {
-        PRINT_LOGS('E', "ERROR_LR1110: Check crystal oscillator!\n");
+        printf("ERROR_LR1110: Check crystal oscillator!\n");
         receive_data_error.lr1110_error = LR1110_CONFIGURATION_ERROR;
         return receive_data_error;
     }
@@ -85,10 +84,10 @@ LR1110ResponseNetworksToDevice_t HE_NetworkReading(void)
     lr11xx_wifi_get_nb_results(NULL, &nb_results);
 
     lr11xx_wifi_basic_mac_type_channel_result_t results[LR11XX_WIFI_MAX_RESULTS];
-    PRINT_LOGS('D', "Number of Wi-Fi networks found before filtering: %d\n", nb_results);
+    printf("Number of Wi-Fi networks found before filtering: %d\n", nb_results);
     if (nb_results == 0)
     {
-        PRINT_LOGS('E', "ERROR_LR1110: No Wi-Fi found!\n");
+        printf("ERROR_LR1110: No Wi-Fi found!\n");
         receive_data_error.lr1110_error = LR1110_NO_WIFI_FOUND;
         return receive_data_error;
     }
@@ -167,13 +166,13 @@ bool LR1110_Read_Version_Status(void)
 
     lr11xx_bootloader_get_version(NULL, &version);
 
-    // PRINT_LOGS('I', "LR1110_FW_Version: %.04X \n", version.fw);
+    // printf("LR1110_FW_Version: %.04X \n", version.fw);
 
     if (version.type != 0x01)
     {
         return FALSE;
         // printf("status: %d\n", status);
-        PRINT_LOGS('E', "ERROR_LR1110: FW_Version - hw: %02X | type: %02X | fw: %.04X \n", version.hw, version.type, version.fw);
+        printf("ERROR_LR1110: FW_Version - hw: %02X | type: %02X | fw: %.04X \n", version.hw, version.type, version.fw);
         // printf("hw: %02X   type: %02X    fw: %.04X \n\n", version.hw, version.type, version.fw);
     }
 
@@ -204,7 +203,7 @@ bool LR1110_Configure(void)
     // printf("erros: %x\n", errors);
     if (errors != 0)
     {
-        PRINT_LOGS('E', "ERROR_LR1110: Configure Error - 0x%02X\n", errors);
+        printf("ERROR_LR1110: Configure Error - 0x%02X\n", errors);
         return FALSE;
     }
 
@@ -224,7 +223,7 @@ bool LR1110_Configure(void)
         //     printf("bool is_compatible: %d\n", is_compatible);
         //     delay_us(1000000);
         // }
-        PRINT_LOGS('E', "ERROR_LR1110: Scan Mode Not Compatible!\n");
+        printf("ERROR_LR1110: Scan Mode Not Compatible!\n");
         return FALSE;
     }
 
